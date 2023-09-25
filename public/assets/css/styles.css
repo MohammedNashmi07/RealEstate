@@ -1,0 +1,10 @@
+/* Add this CSS to your stylesheets */
+.dark-mode-toast {
+    background-color: #333; /* Dark background color */
+    color: #fff; /* Light text color */
+    border-radius: 4px; /* Rounded corners */
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5); /* Shadow for the toast */
+  }
+select option{
+    color: white !important;
+}
