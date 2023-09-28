@@ -11,7 +11,7 @@
                 <h6 class="card-title">Edit Customer</h6>
 
                 <form action="{{route('customers.update', [$customer->id])}}" class="forms-sample" method="POST">
-                    @csrf   
+                    @csrf
                     <div class="row mb-3">
                         <label for="name" class="col-sm-3 col-form-label">Name</label>
                         <div class="col-sm-9">
@@ -39,7 +39,7 @@
                     </div>
 
                     <button type="submit" class="btn btn-primary me-2">Submit</button>
-                    <button class="btn btn-secondary">Cancel</button>
+                    <a href="{{route('customers.index')}}" class="btn btn-secondary">Cancel</a>
                 </form>
 
             </div>

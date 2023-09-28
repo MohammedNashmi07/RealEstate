@@ -5,6 +5,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AgentController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\PropertyController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -19,10 +20,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    
-    return view('welcome', compact('user'));
-});
+
+Route::get('/', [UserController::class, 'welcome'])->name('welcome');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -66,7 +65,16 @@ Route::middleware('auth')->group(function () {
     Route::post('users/store', [UserController::class,'store'])->name('users.store');
     Route::get('users/{id}/edit', [UserController::class,'edit'])->name('users.edit');
     Route::post('users/{id}/update', [UserController::class,'update'])->name('users.update');
-    Route::post('users/{id}/delete', [UserController::class,'destroy'])->name('users.destroy');
+    Route::delete('users/{id}/delete', [UserController::class,'destroy'])->name('users.destroy');
+});
+// property routes
+Route::middleware('auth')->group(function () {
+    Route::get('properties/index', [PropertyController::class, 'index'])->name('properties.index');
+    Route::get('properties/create', [PropertyController::class, 'create'])->name('properties.create');
+    Route::post('properties/store', [PropertyController::class,'store'])->name('properties.store');
+    Route::get('properties/{id}/edit', [PropertyController::class,'edit'])->name('properties.edit');
+    Route::post('properties/{id}/update', [PropertyController::class,'update'])->name('properties.update');
+    Route::delete('properties/{id}/delete', [PropertyController::class,'destroy'])->name('properties.destroy');
 });
 
 

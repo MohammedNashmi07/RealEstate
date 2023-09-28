@@ -5,6 +5,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Customer;
+use App\Models\Property;
 use DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
@@ -13,7 +15,10 @@ class AdminController extends Controller
 {
     public function adminDashboard(){
         $user = Auth::user();
-        return view('admin.dashboard', compact('user'));
+        $customer_count = Customer::count();
+        $sold_properties_count = Property::where('is_sold', 'yes')->count();
+        $properties = Property::where('status','approved')->orderBy('id','desc')->take(5)->get();
+        return view('admin.dashboard', compact('user','customer_count','sold_properties_count','properties'));
     }
 
     public function adminLogout(Request $request): RedirectResponse

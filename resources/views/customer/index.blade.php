@@ -12,7 +12,7 @@
                     <table class="table table-bordered">
                         <thead>
                             <tr>
-                                <th>#</th>
+
                                 <th>Name</th>
                                 <th>Address</th>
                                 <th>Phone</th>
@@ -23,7 +23,7 @@
                         <tbody>
                             @foreach ($customers as $customer)
                             <tr>
-                                <td>{{$customer->id}}</td>
+
                                 <td>{{$customer->name}}</td>
                                 <td>{{$customer->address}}</td>
                                 <td>{{$customer->phone}}</td>
@@ -38,6 +38,9 @@
                             @endforeach
                         </tbody>
                     </table>
+                    <div class="text-right">
+                        {{$customers->links('pagination::bootstrap-4')}}
+                    </div>
                 </div>
             </div>
         </div>
@@ -72,8 +75,9 @@
                         'Deleted!',
                         'Customer successfully deleted.',
                         'success'
-                        )
-                        windows.location.reload();
+                        ).then(() => {
+                            location.reload();
+                        });
                     }
                     else{
                             Swal.mixin({

@@ -157,18 +157,7 @@
             <a class="nav-link " href="property-grid.html">Property</a>
           </li>
 
-          <li class="nav-item">
-            <a class="nav-link " href="blog-grid.html">Blog</a>
-          </li>
 
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Pages</a>
-            <div class="dropdown-menu">
-              <a class="dropdown-item " href="property-single.html">Property Single</a>
-              <a class="dropdown-item " href="blog-single.html">Blog Single</a>
-              <a class="dropdown-item " href="agents-grid.html">Agents Grid</a>
-              <a class="dropdown-item " href="agent-single.html">Agent Single</a>
-            </div>
           </li>
           <li class="nav-item">
             <a class="nav-link " href="contact.html">Contact</a>
@@ -221,82 +210,36 @@
   <div class="intro intro-carousel swiper position-relative">
 
     <div class="swiper-wrapper">
+        @foreach ($slider_properties as $slider_property)
 
-      <div class="swiper-slide carousel-item-a intro-item bg-image" style="background-image: url('{{ asset('frontend_asset/assets/img/slide-1.jpg') }}');">
-        <div class="overlay overlay-a"></div>
-        <div class="intro-content display-table">
-          <div class="table-cell">
-            <div class="container">
-              <div class="row">
-                <div class="col-lg-8">
-                  <div class="intro-body">
-                    <p class="intro-title-top">Doral, Florida
-                      <br> 78345
-                    </p>
-                    <h1 class="intro-title mb-4 ">
-                      <span class="color-b">204 </span> Mount
-                      <br> Olive Road Two
-                    </h1>
-                    <p class="intro-subtitle intro-price">
-                      <a href="#"><span class="price-a">rent | $ 12.000</span></a>
-                    </p>
+        @php
+            $slider_image = App\Models\PropertyImage::where('property_id', $slider_property->id)->first();
+        @endphp
+        <div class="swiper-slide carousel-item-a intro-item bg-image" style="background-image: url('{{ asset($slider_image->image_url) }}');">
+          <div class="overlay overlay-a"></div>
+          <div class="intro-content display-table">
+            <div class="table-cell">
+              <div class="container">
+                <div class="row">
+                  <div class="col-lg-8">
+                    <div class="intro-body">
+
+                      <h1 class="intro-title mb-4 ">
+                        <span class="color-b">{{$slider_property->no}} </span> {{$slider_property->street}}
+                        <br> {{$slider_property->city}}, {{$slider_property->country}}
+                      </h1>
+                      <p class="intro-subtitle intro-price">
+                        <a href="#"><span class="price-a">Price | {{$slider_property->currency_type}} {{number_format($slider_property->price)}}</span></a>
+                      </p>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
-      <div class="swiper-slide carousel-item-a intro-item bg-image" style="background-image: url('{{ asset('frontend_asset/assets/img/slide-2.jpg') }}');">
-        <div class="overlay overlay-a"></div>
-        <div class="intro-content display-table">
-          <div class="table-cell">
-            <div class="container">
-              <div class="row">
-                <div class="col-lg-8">
-                  <div class="intro-body">
-                    <p class="intro-title-top">Doral, Florida
-                      <br> 78345
-                    </p>
-                    <h1 class="intro-title mb-4">
-                      <span class="color-b">204 </span> Rino
-                      <br> Venda Road Five
-                    </h1>
-                    <p class="intro-subtitle intro-price">
-                      <a href="#"><span class="price-a">rent | $ 12.000</span></a>
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="swiper-slide carousel-item-a intro-item bg-image" style="background-image: url('{{ asset('frontend_asset/assets/img/slide-3.jpg') }}');">
-        <div class="overlay overlay-a"></div>
-        <div class="intro-content display-table">
-          <div class="table-cell">
-            <div class="container">
-              <div class="row">
-                <div class="col-lg-8">
-                  <div class="intro-body">
-                    <p class="intro-title-top">Doral, Florida
-                      <br> 78345
-                    </p>
-                    <h1 class="intro-title mb-4">
-                      <span class="color-b">204 </span> Alira
-                      <br> Roan Road One
-                    </h1>
-                    <p class="intro-subtitle intro-price">
-                      <a href="#"><span class="price-a">rent | $ 12.000</span></a>
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+        @endforeach
+
     </div>
     <div class="swiper-pagination"></div>
   </div><!-- End Intro Section -->
@@ -334,9 +277,9 @@
                 </p>
               </div>
               <div class="card-footer-c">
-                <a href="#" class="link-c link-icon">Read more
+                {{-- <a href="#" class="link-c link-icon">Read more
                   <span class="bi bi-chevron-right"></span>
-                </a>
+                </a> --}}
               </div>
             </div>
           </div>
@@ -358,9 +301,9 @@
                 </p>
               </div>
               <div class="card-footer-c">
-                <a href="#" class="link-c link-icon">Read more
+                {{-- <a href="#" class="link-c link-icon">Read more
                   <span class="bi bi-calendar4-week"></span>
-                </a>
+                </a> --}}
               </div>
             </div>
           </div>
@@ -382,9 +325,9 @@
                 </p>
               </div>
               <div class="card-footer-c">
-                <a href="#" class="link-c link-icon">Read more
+                {{-- <a href="#" class="link-c link-icon">Read more
                   <span class="bi bi-chevron-right"></span>
-                </a>
+                </a> --}}
               </div>
             </div>
           </div>
@@ -413,55 +356,39 @@
         <div id="property-carousel" class="swiper">
           <div class="swiper-wrapper">
 
-            <div class="carousel-item-b swiper-slide">
-              <div class="card-box-a card-shadow">
-                <div class="img-box-a">
-                  <img src="{{asset('frontend_asset/assets/img/property-6.jpg')}}" alt="" class="img-a img-fluid">
-                </div>
-                <div class="card-overlay">
-                  <div class="card-overlay-a-content">
-                    <div class="card-header-a">
-                      <h2 class="card-title-a">
-                        <a href="property-single.html">206 Mount
-                          <br /> Olive Road Two</a>
-                      </h2>
+            @foreach ($latest_properties as $latest_property)
+                @php
+                    $latest_property_image = App\Models\PropertyImage::where('property_id', $latest_property->id)->first();
+                @endphp
+                <div class="carousel-item-b swiper-slide">
+                <div class="card-box-a card-shadow">
+                    <div class="img-box-a">
+                    <img src="{{asset($latest_property_image->image_url)}}" alt="" class="img-a img-fluid">
                     </div>
-                    <div class="card-body-a">
-                      <div class="price-box d-flex">
-                        <span class="price-a">rent | $ 12.000</span>
-                      </div>
-                      <a href="#" class="link-a">Click here to view
-                        <span class="bi bi-chevron-right"></span>
-                      </a>
-                    </div>
-                    <div class="card-footer-a">
-                      <ul class="card-info d-flex justify-content-around">
-                        <li>
-                          <h4 class="card-info-title">Area</h4>
-                          <span>340m
-                            <sup>2</sup>
-                          </span>
-                        </li>
-                        <li>
-                          <h4 class="card-info-title">Beds</h4>
-                          <span>2</span>
-                        </li>
-                        <li>
-                          <h4 class="card-info-title">Baths</h4>
-                          <span>4</span>
-                        </li>
-                        <li>
-                          <h4 class="card-info-title">Garages</h4>
-                          <span>1</span>
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div><!-- End carousel item -->
+                    <div class="card-overlay">
+                    <div class="card-overlay-a-content">
+                        <div class="card-header-a">
+                        <h2 class="card-title-a">
+                            <a href="property-single.html">{{$latest_property->no}} {{$latest_property->street}}
+                            <br /> {{$latest_property->city}} {{$latest_property->country}}</a>
+                        </h2>
+                        </div>
+                        <div class="card-body-a">
+                        <div class="price-box d-flex">
+                            <span class="price-a">Price | {{$latest_property->currency_type}} {{number_format($latest_property->price)}}</span>
+                        </div>
+                        <a href="#" class="link-a">Click here to view
+                            <span class="bi bi-chevron-right"></span>
+                        </a>
+                        </div>
 
-            <div class="carousel-item-b swiper-slide">
+                    </div>
+                    </div>
+                </div>
+                </div><!-- End carousel item -->
+            @endforeach
+
+            {{-- <div class="carousel-item-b swiper-slide">
               <div class="card-box-a card-shadow">
                 <div class="img-box-a">
                   <img src="{{asset('frontend_asset/assets/img/property-3.jpg')}}" alt="" class="img-a img-fluid">
@@ -603,7 +530,7 @@
                   </div>
                 </div>
               </div>
-            </div><!-- End carousel item -->
+            </div><!-- End carousel item --> --}}
           </div>
         </div>
         <div class="propery-carousel-pagination carousel-pagination"></div>
@@ -629,63 +556,67 @@
           </div>
         </div>
         <div class="row">
-          <div class="col-md-4">
-            <div class="card-box-d">
-              <div class="card-img-d">
-                <img src="{{asset('frontend_asset/assets/img/agent-4.jpg')}}" alt="" class="img-d img-fluid">
-              </div>
-              <div class="card-overlay card-overlay-hover">
-                <div class="card-header-d">
-                  <div class="card-title-d align-self-center">
-                    <h3 class="title-d">
-                      <a href="agent-single.html" class="link-two">Margaret Sotillo
-                        <br> Escala</a>
-                    </h3>
+            @foreach ($agents as $agent)
+
+            <div class="col-md-4">
+              <div class="card-box-d">
+                {{-- <div class="card-img-d"> --}}
+                  <img src="{{asset($agent->photo)}}" alt=""  class=" img-fluid min-height">
+                {{-- </div> --}}
+                <div class="card-overlay card-overlay-hover">
+                  <div class="card-header-d">
+                    <div class="card-title-d align-self-center">
+                      <h3 class="title-d">
+                        <a href="agent-single.html" class="link-two">{{$agent->name}}
+
+                      </h3>
+                    </div>
                   </div>
-                </div>
-                <div class="card-body-d">
-                  <p class="content-d color-text-a">
-                    Sed porttitor lectus nibh, Cras ultricies ligula sed magna dictum porta two.
-                  </p>
-                  <div class="info-agents color-a">
-                    <p>
-                      <strong>Phone: </strong> +54 356 945234
+                  <div class="card-body-d">
+                    <p class="content-d color-text-a">
+                      Sed porttitor lectus nibh, Cras ultricies ligula sed magna dictum porta two.
                     </p>
-                    <p>
-                      <strong>Email: </strong> agents@example.com
-                    </p>
+                    <div class="info-agents color-a">
+                      <p>
+                        <strong>Phone: </strong> {{$agent->phone}}
+                      </p>
+                      <p>
+                        <strong>Email: </strong> {{$agent->email}}
+                      </p>
+                    </div>
                   </div>
-                </div>
-                <div class="card-footer-d">
-                  <div class="socials-footer d-flex justify-content-center">
-                    <ul class="list-inline">
-                      <li class="list-inline-item">
-                        <a href="#" class="link-one">
-                          <i class="bi bi-facebook" aria-hidden="true"></i>
-                        </a>
-                      </li>
-                      <li class="list-inline-item">
-                        <a href="#" class="link-one">
-                          <i class="bi bi-twitter" aria-hidden="true"></i>
-                        </a>
-                      </li>
-                      <li class="list-inline-item">
-                        <a href="#" class="link-one">
-                          <i class="bi bi-instagram" aria-hidden="true"></i>
-                        </a>
-                      </li>
-                      <li class="list-inline-item">
-                        <a href="#" class="link-one">
-                          <i class="bi bi-linkedin" aria-hidden="true"></i>
-                        </a>
-                      </li>
-                    </ul>
+                  <div class="card-footer-d">
+                    <div class="socials-footer d-flex justify-content-center">
+                      <ul class="list-inline">
+                        <li class="list-inline-item">
+                          <a href="#" class="link-one">
+                            <i class="bi bi-facebook" aria-hidden="true"></i>
+                          </a>
+                        </li>
+                        <li class="list-inline-item">
+                          <a href="#" class="link-one">
+                            <i class="bi bi-twitter" aria-hidden="true"></i>
+                          </a>
+                        </li>
+                        <li class="list-inline-item">
+                          <a href="#" class="link-one">
+                            <i class="bi bi-instagram" aria-hidden="true"></i>
+                          </a>
+                        </li>
+                        <li class="list-inline-item">
+                          <a href="#" class="link-one">
+                            <i class="bi bi-linkedin" aria-hidden="true"></i>
+                          </a>
+                        </li>
+                      </ul>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
-          <div class="col-md-4">
+
+            @endforeach
+          {{-- <div class="col-md-4">
             <div class="card-box-d">
               <div class="card-img-d">
                 <img src="{{asset('frontend_asset/assets/img/agent-1.jpg')}}" alt="" class="img-d img-fluid">
@@ -796,137 +727,15 @@
                 </div>
               </div>
             </div>
-          </div>
+          </div> --}}
         </div>
       </div>
     </section><!-- End Agents Section -->
 
-    <!-- ======= Latest News Section ======= -->
-    <section class="section-news section-t8">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-12">
-            <div class="title-wrap d-flex justify-content-between">
-              <div class="title-box">
-                <h2 class="title-a">Latest News</h2>
-              </div>
-              <div class="title-link">
-                <a href="blog-grid.html">All News
-                  <span class="bi bi-chevron-right"></span>
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
 
-        <div id="news-carousel" class="swiper">
-          <div class="swiper-wrapper">
-
-            <div class="carousel-item-c swiper-slide">
-              <div class="card-box-b card-shadow news-box">
-                <div class="img-box-b">
-                  <img src="{{asset('frontend_asset/assets/img/post-2.jpg')}}" alt="" class="img-b img-fluid">
-                </div>
-                <div class="card-overlay">
-                  <div class="card-header-b">
-                    <div class="card-category-b">
-                      <a href="#" class="category-b">House</a>
-                    </div>
-                    <div class="card-title-b">
-                      <h2 class="title-2">
-                        <a href="blog-single.html">House is comming
-                          <br> new</a>
-                      </h2>
-                    </div>
-                    <div class="card-date">
-                      <span class="date-b">18 Sep. 2017</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div><!-- End carousel item -->
-
-            <div class="carousel-item-c swiper-slide">
-              <div class="card-box-b card-shadow news-box">
-                <div class="img-box-b">
-                  <img src="{{asset('frontend_asset/assets/img/post-5.jpg')}}" alt="" class="img-b img-fluid">
-                </div>
-                <div class="card-overlay">
-                  <div class="card-header-b">
-                    <div class="card-category-b">
-                      <a href="#" class="category-b">Travel</a>
-                    </div>
-                    <div class="card-title-b">
-                      <h2 class="title-2">
-                        <a href="blog-single.html">Travel is comming
-                          <br> new</a>
-                      </h2>
-                    </div>
-                    <div class="card-date">
-                      <span class="date-b">18 Sep. 2017</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div><!-- End carousel item -->
-
-            <div class="carousel-item-c swiper-slide">
-              <div class="card-box-b card-shadow news-box">
-                <div class="img-box-b">
-                  <img src="{{asset('frontend_asset/assets/img/post-7.jpg')}}" alt="" class="img-b img-fluid">
-                </div>
-                <div class="card-overlay">
-                  <div class="card-header-b">
-                    <div class="card-category-b">
-                      <a href="#" class="category-b">Park</a>
-                    </div>
-                    <div class="card-title-b">
-                      <h2 class="title-2">
-                        <a href="blog-single.html">Park is comming
-                          <br> new</a>
-                      </h2>
-                    </div>
-                    <div class="card-date">
-                      <span class="date-b">18 Sep. 2017</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div><!-- End carousel item -->
-
-            <div class="carousel-item-c swiper-slide">
-              <div class="card-box-b card-shadow news-box">
-                <div class="img-box-b">
-                  <img src="{{asset('frontend_asset/assets/img/post-3.jpg')}}" alt="" class="img-b img-fluid">
-                </div>
-                <div class="card-overlay">
-                  <div class="card-header-b">
-                    <div class="card-category-b">
-                      <a href="#" class="category-b">Travel</a>
-                    </div>
-                    <div class="card-title-b">
-                      <h2 class="title-2">
-                        <a href="#">Travel is comming
-                          <br> new</a>
-                      </h2>
-                    </div>
-                    <div class="card-date">
-                      <span class="date-b">18 Sep. 2017</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div><!-- End carousel item -->
-
-          </div>
-        </div>
-
-        <div class="news-carousel-pagination carousel-pagination"></div>
-      </div>
-    </section><!-- End Latest News Section -->
 
     <!-- ======= Testimonials Section ======= -->
-    <section class="section-testimonials section-t8 nav-arrow-a">
+    {{-- <section class="section-testimonials section-t8 nav-arrow-a">
       <div class="container">
         <div class="row">
           <div class="col-md-12">
@@ -1002,7 +811,7 @@
         <div class="testimonial-carousel-pagination carousel-pagination"></div>
 
       </div>
-    </section><!-- End Testimonials Section -->
+    </section><!-- End Testimonials Section --> --}}
 
   </main><!-- End #main -->
 

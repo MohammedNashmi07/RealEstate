@@ -10,8 +10,8 @@
         <div class="card-body">
 
           <div class="d-flex align-items-center justify-content-between mb-2">
-            <div>
-                <img class="wd-100 rounded-circle" src="{{!empty($user->photo) ? asset($user->photo) : url('upload/no_image.jpg')}}" style="width: 100px; height:100px;" alt="profile">
+            <div class="image-container-user">
+                <img class="fixed-shape-image" src="{{!empty($user->photo) ? asset($user->photo) : url('upload/no_image.jpg')}}" style="width: 100px; height:100px;" alt="profile">
                 <span class="h4 ms-3 ">{{$user->user_name}}</span>
             </div>
             <div class="dropdown">
@@ -93,7 +93,9 @@
                                       <div class="mb-3">
                                         <label class="form-label" for="image-input">Photo</label>
                                         <input class="form-control" name="photo" type="file" id="image-input" accept=".jpg,.jpeg,.png" id="formFile"> <br>
-                                        <img class="wd-80 rounded-circle" src="{{url('upload/no_image.jpg')}}" id="preview-image" alt="profile">
+                                       <div class="image-container-user">
+                                           <img class="fixed-shape-image" src="{{url('upload/no_image.jpg')}}" id="preview-image" alt="profile">
+                                       </div>
                                       </div>
 
                                       <button type="submit" class="btn btn-primary me-2">Submit</button>

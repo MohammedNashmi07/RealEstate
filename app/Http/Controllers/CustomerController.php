@@ -4,13 +4,14 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Customer;
 use Illuminate\Http\Request;
+use DB;
 
 class CustomerController extends Controller
 {
     public function customerIndex()
     {
         $user = Auth::user();
-        $customers = Customer::all();
+        $customers = Customer::paginate(5);
         return view('customer.index',compact('user', 'customers'));
     }
 
@@ -26,9 +27,10 @@ class CustomerController extends Controller
     {
         try
         {
-
+            DB::beginTransaction();
             $input = $request->except('_token');
             Customer::create($input);
+            DB::commit();
             $message = [
                 'success' => 1,
                 'message' =>'Customer Created Successfully'
@@ -36,6 +38,7 @@ class CustomerController extends Controller
             return redirect()->route('customers.index')->with('message', $message);
         }
         catch(Exception $e){
+            DB::rollback();
             return redirect()->route('customers.index')->with('message', ['success' => 0, 'message'=>'Something Went Wrong']);
         }
 
@@ -61,11 +64,13 @@ class CustomerController extends Controller
         try{
 
             $customer = Customer::find($id);
+            DB::beginTransaction();
             $customer->name = $request->name;
             $customer->address = $request->address;
             $customer->phone = $request->phone;
             $customer->email = $request->email;
             $customer->save();
+            DB::commit();
             $message = [
                 'success' => 1,
                 'message' =>'Customer Updated Successfully'
@@ -73,6 +78,7 @@ class CustomerController extends Controller
             return redirect()->route('customers.index')->with('message', $message);
         }
         catch(Exception $e){
+            DB::rollback();
             return redirect()->route('customers.index')->with('message', ['success' => 0, 'message'=>'Something Went Wrong']);
         }
     }
@@ -86,7 +92,7 @@ class CustomerController extends Controller
             $customer->delete();
             $message = [
                 'success' => 1,
-                'text' =>'Customer Updated Successfully'
+                'text' =>'Customer Deleted Successfully'
             ];
         }
         catch(Exception $e){

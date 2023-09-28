@@ -8,3 +8,35 @@
 select option{
     color: white !important;
 }
+
+
+.image-container-user {
+    width: 100px; /* Adjust this width to set the desired size for the image */
+    height: 100px; /* Adjust this height to set the desired size for the image */
+    overflow: hidden;
+    border-radius: 50%;
+}
+.image-container {
+    width: 100px; /* Adjust this width to set the desired size for the image */
+    height: 100px; /* Adjust this height to set the desired size for the image */
+    overflow: hidden;
+
+}
+
+.fixed-shape-image {
+    width: 100%; /* Make the image fill the container's width */
+    height: 100%; /* Maintain aspect ratio by using the same height */
+    object-fit: cover; /* Crop the image if necessary to fit the container */
+
+}
+
+.preview-image {
+    max-width: 100px; /* Set the maximum width for each preview image */
+    margin-right: 10px; /* Add some spacing between images */
+}
+
+.min-height {
+    width: 800px !important;
+    height: 896px !important;
+    object-fit: cover;
+}
