@@ -28,6 +28,7 @@ class UserController extends Controller
                     ->get();
         return view('welcome', compact('slider_properties','latest_properties','agents'));
     }
+    
     public function index(){
         $user = Auth::user();
         $active_users = User::where('status','active')
