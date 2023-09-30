@@ -160,6 +160,10 @@
             <a class="nav-link @if (Route::is('all.properties')) active @endif " href="{{route('all.properties')}}">Property</a>
           </li>
 
+          <li class="nav-item">
+            <a class="nav-link @if (Route::is('all.agents')) active @endif " href="{{route('all.agents')}}">Agents</a>
+          </li>
+
 
           </li>
           <li class="nav-item">

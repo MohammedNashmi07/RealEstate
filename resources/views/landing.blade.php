@@ -127,7 +127,7 @@
                 <h2 class="title-a">Latest Properties</h2>
               </div>
               <div class="title-link">
-                <a href="property-grid.html">All Property
+                <a href="{{route('all.properties')}}">All Property
                   <span class="bi bi-chevron-right"></span>
                 </a>
               </div>
@@ -186,7 +186,7 @@
                   <h2 class="title-a">Best Agents</h2>
                 </div>
                 <div class="title-link">
-                  <a href="agents-grid.html">All Agents
+                  <a href="{{route('all.agents')}}">All Agents
                     <span class="bi bi-chevron-right"></span>
                   </a>
                 </div>

@@ -23,6 +23,7 @@ Route::get('/properties/all', [PropertyController::class, 'frontAllProperties'])
 Route::get('/properties/{id}/show', [PropertyController::class, 'showProperty'])->name('properties.show');
 
 // frontend agent show
+Route::get('/agents/all', [AgentController::class, 'frontAllAgents'])->name('all.agents');
 Route::get('/agent/{id}/show', [AgentController::class, 'agentShow'])->name('agent.show');
 
 Route::get('/dashboard', function () {

@@ -31,6 +31,12 @@ class AgentController extends Controller
         return view('agent.show', compact('agent', 'properties'));
     }
 
+    public function frontAllAgents(){
+
+        $agents = User::where('role', 'agent')->where('status','active')->paginate(6);
+        return view('agent.all_agents', compact('agents'));
+    }
+
     public function agentLogout(Request $request): RedirectResponse
     {
         Auth::guard('web')->logout();

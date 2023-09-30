@@ -17,7 +17,6 @@ class PropertyController extends Controller
     // frontend property
     public function frontAllProperties()
     {
-
         $properties = Property::where('is_sold','no')->where('status', 'approved')->paginate(6);
         return view('front_all_property', compact('properties'));
     }
@@ -68,7 +67,7 @@ class PropertyController extends Controller
         $user = Auth::user();
         $property = Property::find($id);
         $property_images = PropertyImage::where('property_id',$property->id)->orderBy('image_url','desc')->get();
-       
+
         if($user->role == 'admin')
         {
             $agents = User::where('role', 'agent')->where('status','active')->get();
@@ -158,6 +157,8 @@ class PropertyController extends Controller
         }
     }
 
+
+
     public function store(Request $request){
         try
         {
@@ -210,7 +211,7 @@ class PropertyController extends Controller
             return redirect()->route('properties.index')->with('message', $message);
         }
         catch(Exception $e){
-            dd($e);
+            // dd($e);
             return redirect()->route('properties.create')->with('message', ['success' => 0, 'message'=>'Something Went Wrong']);
         }
     }
