@@ -9,19 +9,21 @@ use App\Http\Controllers\PropertyController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
+
 
 
 Route::get('/', [UserController::class, 'welcome'])->name('welcome');
+Route::get('/contact', [UserController::class, 'contact'])->name('contact');
+Route::get('/about', [UserController::class, 'about'])->name('about');
+Route::post('/contact/save', [UserController::class, 'contactSave'])->name('contact.save');
+Route::get('/about', [UserController::class, 'about'])->name('about');
+
+// frontend properties
+Route::get('/properties/all', [PropertyController::class, 'frontAllProperties'])->name('all.properties');
+Route::get('/properties/{id}/show', [PropertyController::class, 'showProperty'])->name('properties.show');
+
+// frontend agent show
+Route::get('/agent/{id}/show', [AgentController::class, 'agentShow'])->name('agent.show');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -43,6 +45,7 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/admin/profile', [AdminController::class, 'adminProfile'])->name('admin.profile');
     Route::get('/admin/password', [AdminController::class, 'adminChangePassword'])->name('admin.password.change');
     Route::get('/admin/logout', [AdminController::class, 'adminLogout'])->name('admin.logout');
+
 });
 
 
@@ -67,6 +70,7 @@ Route::middleware('auth')->group(function () {
     Route::post('users/{id}/update', [UserController::class,'update'])->name('users.update');
     Route::delete('users/{id}/delete', [UserController::class,'destroy'])->name('users.destroy');
 });
+
 // property routes
 Route::middleware('auth')->group(function () {
     Route::get('properties/index', [PropertyController::class, 'index'])->name('properties.index');
@@ -81,4 +85,9 @@ Route::middleware('auth')->group(function () {
 // Agent routes
 Route::middleware(['auth', 'role:agent'])->group(function () {
     Route::get('/agent/dashboard', [AgentController::class, 'agentDashboard'])->name('agent.dashboard');
+    Route::get('/agent/logout', [AgentController::class, 'agentLogout'])->name('agent.logout');
+    Route::post('/agent/update', [AgentController::class, 'agentUpdate'])->name('agent.update');
+    Route::post('/agent/password/update', [AgentController::class, 'agentPasswordUpdate'])->name('agent.password.update');
+    Route::get('/agent/profile', [AgentController::class, 'agentProfile'])->name('agent.profile');
+    Route::get('/agent/password', [AgentController::class, 'agentChangePassword'])->name('agent.password.change');
 });

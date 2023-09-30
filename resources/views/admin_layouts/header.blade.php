@@ -14,7 +14,7 @@
         </form> --}}
         <ul class="navbar-nav">
 
-            <li class="nav-item dropdown">
+            {{-- <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="notificationDropdown" role="button"
                     data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <i data-feather="bell"></i>
@@ -84,7 +84,7 @@
                         <a href="javascript:;">View all</a>
                     </div>
                 </div>
-            </li>
+            </li> --}}
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="profileDropdown" role="button"
                     data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -104,29 +104,53 @@
                         </div>
                     </div>
                     <ul class="list-unstyled p-1">
+                        @if ($user->role == 'admin')
+                            <li class="dropdown-item py-2">
+                                <a href="{{route('admin.profile')}}" class="text-body ms-0">
+                                    <i class="me-2 icon-md" data-feather="user"></i>
+                                    <span>Profile</span>
+                                </a>
+                            </li>
+                        @else
+                            <li class="dropdown-item py-2">
+                                <a href="{{route('agent.profile')}}" class="text-body ms-0">
+                                    <i class="me-2 icon-md" data-feather="user"></i>
+                                    <span>Profile</span>
+                                </a>
+                            </li>
+                        @endif
+                        @if ($user->role == 'admin')
+                            <li class="dropdown-item py-2">
+                                <a href="{{route('admin.password.change')}}" class="text-body ms-0">
+                                    <i class="me-2 icon-md" data-feather="edit"></i>
+                                    <span>Change Password</span>
+                                </a>
+                            </li>
+                        @else
+
+                            <li class="dropdown-item py-2">
+                                <a href="{{route('agent.password.change')}}" class="text-body ms-0">
+                                    <i class="me-2 icon-md" data-feather="edit"></i>
+                                    <span>Change Password</span>
+                                </a>
+                            </li>
+                        @endif
+                        
                         <li class="dropdown-item py-2">
-                            <a href="{{route('admin.profile')}}" class="text-body ms-0">
-                                <i class="me-2 icon-md" data-feather="user"></i>
-                                <span>Profile</span>
-                            </a>
-                        </li>
-                        <li class="dropdown-item py-2">
-                            <a href="{{route('admin.password.change')}}" class="text-body ms-0">
-                                <i class="me-2 icon-md" data-feather="edit"></i>
-                                <span>Change Password</span>
-                            </a>
-                        </li>
-                        <li class="dropdown-item py-2">
-                            <a href="javascript:;" class="text-body ms-0">
-                                <i class="me-2 icon-md" data-feather="repeat"></i>
-                                <span>Switch User</span>
-                            </a>
-                        </li>
-                        <li class="dropdown-item py-2">
-                            <a href="{{route('admin.logout')}}" class="text-body ms-0">
-                                <i class="me-2 icon-md" data-feather="log-out"></i>
-                                <span>Log Out</span>
-                            </a>
+                            @if ($user->role == 'admin')
+                                <a href="{{route('admin.logout')}}" class="text-body ms-0">
+                                    <i class="me-2 icon-md" data-feather="log-out"></i>
+                                    <span>Log Out</span>
+                                </a>
+
+                            @else
+
+                                <a href="{{route('agent.logout')}}" class="text-body ms-0">
+                                    <i class="me-2 icon-md" data-feather="log-out"></i>
+                                    <span>Log Out</span>
+                                </a>
+
+                            @endif
                         </li>
                     </ul>
                 </div>

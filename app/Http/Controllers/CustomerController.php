@@ -12,6 +12,7 @@ class CustomerController extends Controller
     {
         $user = Auth::user();
         $customers = Customer::paginate(5);
+        
         return view('customer.index',compact('user', 'customers'));
     }
 

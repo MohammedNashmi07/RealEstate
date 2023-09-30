@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+use App\Models\Contact;
 use App\Models\Property;
 use DB;
 use Illuminate\Support\Facades\Hash;
@@ -14,11 +15,13 @@ class UserController extends Controller
 
     public function welcome(){
         $slider_properties = Property::where('status', 'approved')
+                ->where('is_sold','no')
                 ->inRandomOrder()
                 ->take(3)
                 ->get();
         $latest_properties = Property::where('status', 'approved')
                     ->orderBy('created_at', 'desc')
+                    ->where('is_sold','no')
                     ->take(3)
                     ->get();
         $agents = User::where('role','agent')
@@ -26,9 +29,37 @@ class UserController extends Controller
                     ->inRandomOrder()
                     ->take(3)
                     ->get();
-        return view('welcome', compact('slider_properties','latest_properties','agents'));
+        return view('landing', compact('slider_properties','latest_properties','agents'));
     }
-    
+
+    public function contact(){
+
+        return view('contact');
+    }
+
+    public function about(){
+
+        return view('about');
+    }
+
+    public function contactSave(Request $request)
+    {
+        try
+        {
+            $input = $request->except('_token');
+
+               Contact::create($input);
+               return response()->json(['success' => true, 'text' => 'Password Successfully Updated..!']);
+
+        }
+
+        catch(Exception $e){
+            // dd($e);
+            return response()->json(['success' => false, 'text' => 'Something went wrong..!']);
+        }
+
+    }
+
     public function index(){
         $user = Auth::user();
         $active_users = User::where('status','active')
@@ -161,8 +192,7 @@ class UserController extends Controller
                         'success' => 0,
                         'text' =>'This Agent Has Properties Cannot Delete'
                     ];
-                    // return $message;
-                    // return response()->json(['success' => false, 'text' => 'This Agent Has Properties Cannot Delete..!']);
+
                     return $message;
                 }
             }

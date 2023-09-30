@@ -1,8 +1,17 @@
 <nav class="sidebar">
     <div class="sidebar-header">
-      <a href="{{route('admin.dashboard')}}" class="sidebar-brand">
-        Estate<span>Agency</span>
-      </a>
+        @if ($user->role == 'admin')
+
+        <a href="{{route('admin.dashboard')}}" class="sidebar-brand">
+          Estate<span>Agency</span>
+        </a>
+
+        @else
+
+        <a href="{{route('agent.dashboard')}}" class="sidebar-brand">
+          Estate<span>Agency</span>
+        </a>
+        @endif
       <div class="sidebar-toggler not-active">
         <span></span>
         <span></span>
@@ -13,11 +22,23 @@
       <ul class="nav">
         <li class="nav-item nav-category">Main</li>
         <li class="nav-item">
-          <a href="{{route('admin.dashboard')}}" class="nav-link">
-            <i class="link-icon" data-feather="box"></i>
-            <span class="link-title">Dashboard</span>
-          </a>
+            @if ($user->role == 'admin')
+
+            <a href="{{route('admin.dashboard')}}" class="nav-link">
+              <i class="link-icon" data-feather="box"></i>
+              <span class="link-title">Dashboard</span>
+            </a>
+
+            @else
+
+            <a href="{{route('agent.dashboard')}}" class="nav-link">
+              <i class="link-icon" data-feather="box"></i>
+              <span class="link-title">Dashboard</span>
+            </a>
+
+            @endif
         </li>
+        @if ($user->role == 'admin')
         <li class="nav-item nav-category">Customers</li>
         <li class="nav-item">
           <a class="nav-link" data-bs-toggle="collapse" href="#customers" role="button" aria-expanded="false" aria-controls="emails">
@@ -37,7 +58,8 @@
             </ul>
           </div>
         </li>
-
+        @endif
+        @if ($user->role == 'admin')
           <li class="nav-item nav-category">Users</li>
           <li class="nav-item">
             <a class="nav-link" data-bs-toggle="collapse" href="#general-pages" role="button" aria-expanded="false" aria-controls="general-pages">
@@ -57,6 +79,8 @@
               </ul>
             </div>
           </li>
+          @endif
+
           <li class="nav-item nav-category">Properties</li>
           <li class="nav-item">
             <a class="nav-link" data-bs-toggle="collapse" href="#general-pages" role="button" aria-expanded="false" aria-controls="general-pages">

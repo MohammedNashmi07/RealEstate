@@ -112,19 +112,19 @@ License: For each use you must have a valid license purchased only from above li
                     <form class="forms-sample" method="POST" action="{{ route('login') }}">
                         @csrf
                       <div class="mb-3">
-                        <label for="login" class="form-label">Email/Name/Phone</label>
+                        <label for="login" class="form-label">Email/Username/Phone</label>
                         <input type="text" name="login" class="form-control" id="login" placeholder="Email/Name/Phone">
                       </div>
                       <div class="mb-3">
                         <label for="userPassword" class="form-label">Password</label>
                         <input type="password" name="password" class="form-control" id="password" autocomplete="current-password" placeholder="Password">
                       </div>
-                      <div class="form-check mb-3">
+                      {{-- <div class="form-check mb-3">
                         <input type="checkbox" class="form-check-input" id="authCheck">
                         <label class="form-check-label" for="authCheck">
                           Remember me
                         </label>
-                      </div>
+                      </div> --}}
                       <div>
 
                         <button class="btn btn-outline-primary btn-icon-text mb-2 mb-md-0">Login</button>

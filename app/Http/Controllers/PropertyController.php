@@ -14,15 +14,51 @@ use Illuminate\Http\Request;
 
 class PropertyController extends Controller
 {
+    // frontend property
+    public function frontAllProperties()
+    {
+
+        $properties = Property::where('is_sold','no')->where('status', 'approved')->paginate(6);
+        return view('front_all_property', compact('properties'));
+    }
+
+    public function showProperty($id){
+
+        $property = Property::find($id);
+        $property_images = PropertyImage::where('property_id', $property->id)->get();
+        $agent = User::find($property->agent_id);
+        return view('property.show', compact('property', 'property_images', 'agent'));
+    }
+
+
      public function index(){
         $user = Auth::user();
-        $properties = Property::paginate(5);
+
+        if($user->role == 'admin')
+        {
+
+            $properties = Property::paginate(5);
+        }
+        else{
+            $properties = Property::where('agent_id', $user->id)->paginate(5);
+        }
         return view('property.index', compact('user', 'properties'));
     }
 
     public function create(){
         $user = Auth::user();
-        $agents =User::where('role', 'agent')->where('status','active')->get();
+        if($user->role == 'admin')
+        {
+            $agents = User::where('role', 'agent')->where('status','active')->get();
+        }
+        else{
+
+            $agents = User::where('role', 'agent')
+            ->where('status','active')
+            ->where('id',$user->id)
+            ->get();
+
+        }
         $customers = Customer::all();
         return view('property.create', compact('user','agents','customers'));
     }
@@ -32,7 +68,19 @@ class PropertyController extends Controller
         $user = Auth::user();
         $property = Property::find($id);
         $property_images = PropertyImage::where('property_id',$property->id)->orderBy('image_url','desc')->get();
-        $agents =User::where('role', 'agent')->where('status','active')->get();
+       
+        if($user->role == 'admin')
+        {
+            $agents = User::where('role', 'agent')->where('status','active')->get();
+        }
+        else{
+
+            $agents = User::where('role', 'agent')
+            ->where('status','active')
+            ->where('id',$user->id)
+            ->get();
+
+        }
         $customers = Customer::all();
         return view('property.edit', compact('user','property','property_images','agents','customers'));
     }

@@ -7,7 +7,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>EstateAgency Bootstrap Template - Index</title>
+  <title>EstateAgency - Real Estate Holdings</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -27,6 +27,9 @@
   <!-- Template Main CSS File -->
   <link href="{{asset('frontend_asset/assets/css/style.css')}}" rel="stylesheet">
 
+  {{-- toast  --}}
+<link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.28/dist/sweetalert2.min.css" rel="stylesheet">
+
   <!-- =======================================================
   * Template Name: EstateAgency
   * Updated: Sep 18 2023 with Bootstrap v5.3.2
@@ -39,9 +42,9 @@
 <body>
 
   <!-- ======= Property Search Section ======= -->
-  <div class="click-closed"></div>
+  {{-- <div class="click-closed"></div> --}}
   <!--/ Form Search Star /-->
-  <div class="box-collapse">
+  {{-- <div class="box-collapse">
     <div class="title-box-d">
       <h3 class="title-d">Search Property</h3>
     </div>
@@ -130,7 +133,7 @@
         </div>
       </form>
     </div>
-  </div><!-- End Property Search Section -->>
+  </div><!-- End Property Search Section -->> --}}
 
   <!-- ======= Header/Navbar ======= -->
   <nav class="navbar navbar-default navbar-trans navbar-expand-lg fixed-top">
@@ -140,27 +143,27 @@
         <span></span>
         <span></span>
       </button>
-      <a class="navbar-brand text-brand" href="index.html">Estate<span class="color-b">Agency</span></a>
+      <a class="navbar-brand text-brand" href="{{route('welcome')}}">Estate<span class="color-b">Agency</span></a>
 
       <div class="navbar-collapse collapse justify-content-center" id="navbarDefault">
         <ul class="navbar-nav">
 
           <li class="nav-item">
-            <a class="nav-link active" href="index.html">Home</a>
+            <a class="nav-link @if (Route::is('welcome')) active @endif " href="{{route('welcome')}}">Home</a>
           </li>
 
           <li class="nav-item">
-            <a class="nav-link " href="about.html">About</a>
+            <a class="nav-link " @if (Route::is('about')) active @endif " href="{{route('about')}}">About</a>
           </li>
 
           <li class="nav-item">
-            <a class="nav-link " href="property-grid.html">Property</a>
+            <a class="nav-link @if (Route::is('all.properties')) active @endif " href="{{route('all.properties')}}">Property</a>
           </li>
 
 
           </li>
           <li class="nav-item">
-            <a class="nav-link " href="contact.html">Contact</a>
+            <a class="nav-link " href="{{route('contact')}}">Contact</a>
           </li>
 
           @php
@@ -189,631 +192,27 @@
                             <a class="nav-link " href="{{ route('login') }}">Login</a>
                         </li>
 
-                        @if (Route::has('register'))
+                        {{-- @if (Route::has('register'))
 
                             <a class="nav-link " href="{{ route('register') }}">Register</a>
                         </li>
-                        @endif
+                        @endif --}}
                     @endauth
             @endif
         </ul>
       </div>
-
+{{--
       <button type="button" class="btn btn-b-n navbar-toggle-box navbar-toggle-box-collapse" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01">
         <i class="bi bi-search"></i>
-      </button>
+      </button>--}}
 
     </div>
   </nav><!-- End Header/Navbar -->
 
-  <!-- ======= Intro Section ======= -->
-  <div class="intro intro-carousel swiper position-relative">
+    @yield('frontend_content')
 
-    <div class="swiper-wrapper">
-        @foreach ($slider_properties as $slider_property)
+    @yield('front_scripts')
 
-        @php
-            $slider_image = App\Models\PropertyImage::where('property_id', $slider_property->id)->first();
-        @endphp
-        <div class="swiper-slide carousel-item-a intro-item bg-image" style="background-image: url('{{ asset($slider_image->image_url) }}');">
-          <div class="overlay overlay-a"></div>
-          <div class="intro-content display-table">
-            <div class="table-cell">
-              <div class="container">
-                <div class="row">
-                  <div class="col-lg-8">
-                    <div class="intro-body">
-
-                      <h1 class="intro-title mb-4 ">
-                        <span class="color-b">{{$slider_property->no}} </span> {{$slider_property->street}}
-                        <br> {{$slider_property->city}}, {{$slider_property->country}}
-                      </h1>
-                      <p class="intro-subtitle intro-price">
-                        <a href="#"><span class="price-a">Price | {{$slider_property->currency_type}} {{number_format($slider_property->price)}}</span></a>
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        @endforeach
-
-    </div>
-    <div class="swiper-pagination"></div>
-  </div><!-- End Intro Section -->
-
-  <main id="main">
-
-    <!-- ======= Services Section ======= -->
-    <section class="section-services section-t8">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-12">
-            <div class="title-wrap d-flex justify-content-between">
-              <div class="title-box">
-                <h2 class="title-a">Our Services</h2>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-4">
-            <div class="card-box-c foo">
-              <div class="card-header-c d-flex">
-                <div class="card-box-ico">
-                  <span class="bi bi-cart"></span>
-                </div>
-                <div class="card-title-c align-self-center">
-                  <h2 class="title-c">Lifestyle</h2>
-                </div>
-              </div>
-              <div class="card-body-c">
-                <p class="content-c">
-                  Sed porttitor lectus nibh. Cras ultricies ligula sed magna dictum porta. Praesent sapien massa,
-                  convallis a pellentesque
-                  nec, egestas non nisi.
-                </p>
-              </div>
-              <div class="card-footer-c">
-                {{-- <a href="#" class="link-c link-icon">Read more
-                  <span class="bi bi-chevron-right"></span>
-                </a> --}}
-              </div>
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div class="card-box-c foo">
-              <div class="card-header-c d-flex">
-                <div class="card-box-ico">
-                  <span class="bi bi-calendar4-week"></span>
-                </div>
-                <div class="card-title-c align-self-center">
-                  <h2 class="title-c">Loans</h2>
-                </div>
-              </div>
-              <div class="card-body-c">
-                <p class="content-c">
-                  Nulla porttitor accumsan tincidunt. Curabitur aliquet quam id dui posuere blandit. Mauris blandit
-                  aliquet elit, eget tincidunt
-                  nibh pulvinar a.
-                </p>
-              </div>
-              <div class="card-footer-c">
-                {{-- <a href="#" class="link-c link-icon">Read more
-                  <span class="bi bi-calendar4-week"></span>
-                </a> --}}
-              </div>
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div class="card-box-c foo">
-              <div class="card-header-c d-flex">
-                <div class="card-box-ico">
-                  <span class="bi bi-card-checklist"></span>
-                </div>
-                <div class="card-title-c align-self-center">
-                  <h2 class="title-c">Sell</h2>
-                </div>
-              </div>
-              <div class="card-body-c">
-                <p class="content-c">
-                  Sed porttitor lectus nibh. Cras ultricies ligula sed magna dictum porta. Praesent sapien massa,
-                  convallis a pellentesque
-                  nec, egestas non nisi.
-                </p>
-              </div>
-              <div class="card-footer-c">
-                {{-- <a href="#" class="link-c link-icon">Read more
-                  <span class="bi bi-chevron-right"></span>
-                </a> --}}
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section><!-- End Services Section -->
-
-    <!-- ======= Latest Properties Section ======= -->
-    <section class="section-property section-t8">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-12">
-            <div class="title-wrap d-flex justify-content-between">
-              <div class="title-box">
-                <h2 class="title-a">Latest Properties</h2>
-              </div>
-              <div class="title-link">
-                <a href="property-grid.html">All Property
-                  <span class="bi bi-chevron-right"></span>
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div id="property-carousel" class="swiper">
-          <div class="swiper-wrapper">
-
-            @foreach ($latest_properties as $latest_property)
-                @php
-                    $latest_property_image = App\Models\PropertyImage::where('property_id', $latest_property->id)->first();
-                @endphp
-                <div class="carousel-item-b swiper-slide">
-                <div class="card-box-a card-shadow">
-                    <div class="img-box-a">
-                    <img src="{{asset($latest_property_image->image_url)}}" alt="" class="img-a img-fluid">
-                    </div>
-                    <div class="card-overlay">
-                    <div class="card-overlay-a-content">
-                        <div class="card-header-a">
-                        <h2 class="card-title-a">
-                            <a href="property-single.html">{{$latest_property->no}} {{$latest_property->street}}
-                            <br /> {{$latest_property->city}} {{$latest_property->country}}</a>
-                        </h2>
-                        </div>
-                        <div class="card-body-a">
-                        <div class="price-box d-flex">
-                            <span class="price-a">Price | {{$latest_property->currency_type}} {{number_format($latest_property->price)}}</span>
-                        </div>
-                        <a href="#" class="link-a">Click here to view
-                            <span class="bi bi-chevron-right"></span>
-                        </a>
-                        </div>
-
-                    </div>
-                    </div>
-                </div>
-                </div><!-- End carousel item -->
-            @endforeach
-
-            {{-- <div class="carousel-item-b swiper-slide">
-              <div class="card-box-a card-shadow">
-                <div class="img-box-a">
-                  <img src="{{asset('frontend_asset/assets/img/property-3.jpg')}}" alt="" class="img-a img-fluid">
-                </div>
-                <div class="card-overlay">
-                  <div class="card-overlay-a-content">
-                    <div class="card-header-a">
-                      <h2 class="card-title-a">
-                        <a href="property-single.html">157 West
-                          <br /> Central Park</a>
-                      </h2>
-                    </div>
-                    <div class="card-body-a">
-                      <div class="price-box d-flex">
-                        <span class="price-a">rent | $ 12.000</span>
-                      </div>
-                      <a href="property-single.html" class="link-a">Click here to view
-                        <span class="bi bi-chevron-right"></span>
-                      </a>
-                    </div>
-                    <div class="card-footer-a">
-                      <ul class="card-info d-flex justify-content-around">
-                        <li>
-                          <h4 class="card-info-title">Area</h4>
-                          <span>340m
-                            <sup>2</sup>
-                          </span>
-                        </li>
-                        <li>
-                          <h4 class="card-info-title">Beds</h4>
-                          <span>2</span>
-                        </li>
-                        <li>
-                          <h4 class="card-info-title">Baths</h4>
-                          <span>4</span>
-                        </li>
-                        <li>
-                          <h4 class="card-info-title">Garages</h4>
-                          <span>1</span>
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div><!-- End carousel item -->
-
-            <div class="carousel-item-b swiper-slide">
-              <div class="card-box-a card-shadow">
-                <div class="img-box-a">
-                  <img src="{{asset('frontend_asset/assets/img/property-7.jpg')}}" alt="" class="img-a img-fluid">
-                </div>
-                <div class="card-overlay">
-                  <div class="card-overlay-a-content">
-                    <div class="card-header-a">
-                      <h2 class="card-title-a">
-                        <a href="property-single.html">245 Azabu
-                          <br /> Nishi Park let</a>
-                      </h2>
-                    </div>
-                    <div class="card-body-a">
-                      <div class="price-box d-flex">
-                        <span class="price-a">rent | $ 12.000</span>
-                      </div>
-                      <a href="property-single.html" class="link-a">Click here to view
-                        <span class="bi bi-chevron-right"></span>
-                      </a>
-                    </div>
-                    <div class="card-footer-a">
-                      <ul class="card-info d-flex justify-content-around">
-                        <li>
-                          <h4 class="card-info-title">Area</h4>
-                          <span>340m
-                            <sup>2</sup>
-                          </span>
-                        </li>
-                        <li>
-                          <h4 class="card-info-title">Beds</h4>
-                          <span>2</span>
-                        </li>
-                        <li>
-                          <h4 class="card-info-title">Baths</h4>
-                          <span>4</span>
-                        </li>
-                        <li>
-                          <h4 class="card-info-title">Garages</h4>
-                          <span>1</span>
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div><!-- End carousel item -->
-
-            <div class="carousel-item-b swiper-slide">
-              <div class="card-box-a card-shadow">
-                <div class="img-box-a">
-                  <img src="{{asset('frontend_asset/assets/img/property-10.jpg')}}" alt="" class="img-a img-fluid">
-                </div>
-                <div class="card-overlay">
-                  <div class="card-overlay-a-content">
-                    <div class="card-header-a">
-                      <h2 class="card-title-a">
-                        <a href="property-single.html">204 Montal
-                          <br /> South Bela Two</a>
-                      </h2>
-                    </div>
-                    <div class="card-body-a">
-                      <div class="price-box d-flex">
-                        <span class="price-a">rent | $ 12.000</span>
-                      </div>
-                      <a href="property-single.html" class="link-a">Click here to view
-                        <span class="bi bi-chevron-right"></span>
-                      </a>
-                    </div>
-                    <div class="card-footer-a">
-                      <ul class="card-info d-flex justify-content-around">
-                        <li>
-                          <h4 class="card-info-title">Area</h4>
-                          <span>340m
-                            <sup>2</sup>
-                          </span>
-                        </li>
-                        <li>
-                          <h4 class="card-info-title">Beds</h4>
-                          <span>2</span>
-                        </li>
-                        <li>
-                          <h4 class="card-info-title">Baths</h4>
-                          <span>4</span>
-                        </li>
-                        <li>
-                          <h4 class="card-info-title">Garages</h4>
-                          <span>1</span>
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div><!-- End carousel item --> --}}
-          </div>
-        </div>
-        <div class="propery-carousel-pagination carousel-pagination"></div>
-
-      </div>
-    </section><!-- End Latest Properties Section -->
-
-    <!-- ======= Agents Section ======= -->
-    <section class="section-agents section-t8">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-12">
-            <div class="title-wrap d-flex justify-content-between">
-              <div class="title-box">
-                <h2 class="title-a">Best Agents</h2>
-              </div>
-              <div class="title-link">
-                <a href="agents-grid.html">All Agents
-                  <span class="bi bi-chevron-right"></span>
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="row">
-            @foreach ($agents as $agent)
-
-            <div class="col-md-4">
-              <div class="card-box-d">
-                {{-- <div class="card-img-d"> --}}
-                  <img src="{{asset($agent->photo)}}" alt=""  class=" img-fluid min-height">
-                {{-- </div> --}}
-                <div class="card-overlay card-overlay-hover">
-                  <div class="card-header-d">
-                    <div class="card-title-d align-self-center">
-                      <h3 class="title-d">
-                        <a href="agent-single.html" class="link-two">{{$agent->name}}
-
-                      </h3>
-                    </div>
-                  </div>
-                  <div class="card-body-d">
-                    <p class="content-d color-text-a">
-                      Sed porttitor lectus nibh, Cras ultricies ligula sed magna dictum porta two.
-                    </p>
-                    <div class="info-agents color-a">
-                      <p>
-                        <strong>Phone: </strong> {{$agent->phone}}
-                      </p>
-                      <p>
-                        <strong>Email: </strong> {{$agent->email}}
-                      </p>
-                    </div>
-                  </div>
-                  <div class="card-footer-d">
-                    <div class="socials-footer d-flex justify-content-center">
-                      <ul class="list-inline">
-                        <li class="list-inline-item">
-                          <a href="#" class="link-one">
-                            <i class="bi bi-facebook" aria-hidden="true"></i>
-                          </a>
-                        </li>
-                        <li class="list-inline-item">
-                          <a href="#" class="link-one">
-                            <i class="bi bi-twitter" aria-hidden="true"></i>
-                          </a>
-                        </li>
-                        <li class="list-inline-item">
-                          <a href="#" class="link-one">
-                            <i class="bi bi-instagram" aria-hidden="true"></i>
-                          </a>
-                        </li>
-                        <li class="list-inline-item">
-                          <a href="#" class="link-one">
-                            <i class="bi bi-linkedin" aria-hidden="true"></i>
-                          </a>
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            @endforeach
-          {{-- <div class="col-md-4">
-            <div class="card-box-d">
-              <div class="card-img-d">
-                <img src="{{asset('frontend_asset/assets/img/agent-1.jpg')}}" alt="" class="img-d img-fluid">
-              </div>
-              <div class="card-overlay card-overlay-hover">
-                <div class="card-header-d">
-                  <div class="card-title-d align-self-center">
-                    <h3 class="title-d">
-                      <a href="agent-single.html" class="link-two">Stiven Spilver
-                        <br> Darw</a>
-                    </h3>
-                  </div>
-                </div>
-                <div class="card-body-d">
-                  <p class="content-d color-text-a">
-                    Sed porttitor lectus nibh, Cras ultricies ligula sed magna dictum porta two.
-                  </p>
-                  <div class="info-agents color-a">
-                    <p>
-                      <strong>Phone: </strong> +54 356 945234
-                    </p>
-                    <p>
-                      <strong>Email: </strong> agents@example.com
-                    </p>
-                  </div>
-                </div>
-                <div class="card-footer-d">
-                  <div class="socials-footer d-flex justify-content-center">
-                    <ul class="list-inline">
-                      <li class="list-inline-item">
-                        <a href="#" class="link-one">
-                          <i class="bi bi-facebook" aria-hidden="true"></i>
-                        </a>
-                      </li>
-                      <li class="list-inline-item">
-                        <a href="#" class="link-one">
-                          <i class="bi bi-twitter" aria-hidden="true"></i>
-                        </a>
-                      </li>
-                      <li class="list-inline-item">
-                        <a href="#" class="link-one">
-                          <i class="bi bi-instagram" aria-hidden="true"></i>
-                        </a>
-                      </li>
-                      <li class="list-inline-item">
-                        <a href="#" class="link-one">
-                          <i class="bi bi-linkedin" aria-hidden="true"></i>
-                        </a>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div class="card-box-d">
-              <div class="card-img-d">
-                <img src="{{asset('frontend_asset/assets/img/agent-5.jpg')}}" alt="" class="img-d img-fluid">
-              </div>
-              <div class="card-overlay card-overlay-hover">
-                <div class="card-header-d">
-                  <div class="card-title-d align-self-center">
-                    <h3 class="title-d">
-                      <a href="agent-single.html" class="link-two">Emma Toledo
-                        <br> Cascada</a>
-                    </h3>
-                  </div>
-                </div>
-                <div class="card-body-d">
-                  <p class="content-d color-text-a">
-                    Sed porttitor lectus nibh, Cras ultricies ligula sed magna dictum porta two.
-                  </p>
-                  <div class="info-agents color-a">
-                    <p>
-                      <strong>Phone: </strong> +54 356 945234
-                    </p>
-                    <p>
-                      <strong>Email: </strong> agents@example.com
-                    </p>
-                  </div>
-                </div>
-                <div class="card-footer-d">
-                  <div class="socials-footer d-flex justify-content-center">
-                    <ul class="list-inline">
-                      <li class="list-inline-item">
-                        <a href="#" class="link-one">
-                          <i class="bi bi-facebook" aria-hidden="true"></i>
-                        </a>
-                      </li>
-                      <li class="list-inline-item">
-                        <a href="#" class="link-one">
-                          <i class="bi bi-twitter" aria-hidden="true"></i>
-                        </a>
-                      </li>
-                      <li class="list-inline-item">
-                        <a href="#" class="link-one">
-                          <i class="bi bi-instagram" aria-hidden="true"></i>
-                        </a>
-                      </li>
-                      <li class="list-inline-item">
-                        <a href="#" class="link-one">
-                          <i class="bi bi-linkedin" aria-hidden="true"></i>
-                        </a>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div> --}}
-        </div>
-      </div>
-    </section><!-- End Agents Section -->
-
-
-
-    <!-- ======= Testimonials Section ======= -->
-    {{-- <section class="section-testimonials section-t8 nav-arrow-a">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-12">
-            <div class="title-wrap d-flex justify-content-between">
-              <div class="title-box">
-                <h2 class="title-a">Testimonials</h2>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div id="testimonial-carousel" class="swiper">
-          <div class="swiper-wrapper">
-
-            <div class="carousel-item-a swiper-slide">
-              <div class="testimonials-box">
-                <div class="row">
-                  <div class="col-sm-12 col-md-6">
-                    <div class="testimonial-img">
-                      <img src="{{asset('frontend_asset/assets/img/testimonial-1.jpg')}}" alt="" class="img-fluid">
-                    </div>
-                  </div>
-                  <div class="col-sm-12 col-md-6">
-                    <div class="testimonial-ico">
-                      <i class="bi bi-chat-quote-fill"></i>
-                    </div>
-                    <div class="testimonials-content">
-                      <p class="testimonial-text">
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis, cupiditate ea nam praesentium
-                        debitis hic ber quibusdam
-                        voluptatibus officia expedita corpori.
-                      </p>
-                    </div>
-                    <div class="testimonial-author-box">
-                      <img src="{{asset('frontend_asset/assets/img/mini-testimonial-1.jpg')}}" alt="" class="testimonial-avatar">
-                      <h5 class="testimonial-author">Albert & Erika</h5>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div><!-- End carousel item -->
-
-            <div class="carousel-item-a swiper-slide">
-              <div class="testimonials-box">
-                <div class="row">
-                  <div class="col-sm-12 col-md-6">
-                    <div class="testimonial-img">
-                      <img src="{{asset('frontend_asset/assets/img/testimonial-2.jpg')}}" alt="" class="img-fluid">
-                    </div>
-                  </div>
-                  <div class="col-sm-12 col-md-6">
-                    <div class="testimonial-ico">
-                      <i class="bi bi-chat-quote-fill"></i>
-                    </div>
-                    <div class="testimonials-content">
-                      <p class="testimonial-text">
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis, cupiditate ea nam praesentium
-                        debitis hic ber quibusdam
-                        voluptatibus officia expedita corpori.
-                      </p>
-                    </div>
-                    <div class="testimonial-author-box">
-                      <img src="{{asset('frontend_asset/assets/img/mini-testimonial-2.jpg')}}" alt="" class="testimonial-avatar">
-                      <h5 class="testimonial-author">Pablo & Emma</h5>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div><!-- End carousel item -->
-
-          </div>
-        </div>
-        <div class="testimonial-carousel-pagination carousel-pagination"></div>
-
-      </div>
-    </section><!-- End Testimonials Section --> --}}
-
-  </main><!-- End #main -->
 
   <!-- ======= Footer ======= -->
   <section class="section-footer">
@@ -982,6 +381,49 @@
 
   <!-- Template Main JS File -->
   <script src="{{asset('frontend_asset/assets/js/main.js')}}"></script>
+
+    {{-- sweet alert  --}}
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.28/dist/sweetalert2.all.min.js"></script>
+{{-- jquery cdn  --}}
+<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+
+    {{-- toast --}}
+    <script>
+
+        const toastMixin = Swal.mixin({
+        toast: true,
+        position: 'top-right',
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+          toast.addEventListener('mouseenter', Swal.stopTimer)
+          toast.addEventListener('mouseleave', Swal.resumeTimer)
+        },
+        customClass: {
+        container: 'dark-mode-toast', // Add a custom CSS class
+      },
+      });
+
+
+        @if (session()->has('message.success'))
+            @if (session('message.success') == '1')
+                toastMixin.fire({
+                    icon: 'success',
+                    animation: true,
+                    title: "{{ session('message.message') }}"
+                });
+            @else
+                toastMixin.fire({
+                    icon: 'error',
+                    animation: true,
+                    title: "{{ session('message.message') }}"
+                });
+            @endif
+        @endif
+
+
+    </script>
 
 </body>
 
