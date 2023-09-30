@@ -54,18 +54,25 @@
                                 <td>{{$property->agent->name}}</td>
                                 <td>{{$property->customer->name}}</td>
                                 <td>
+                                    @if ($user->role == 'admin')
                                     <a class="btn btn-sm btn-primary btn-icon"
                                         href="{{route('properties.edit',[$property->id])}}"><i
                                             data-feather="edit"></i></a>
                                     <button class="btn btn-sm btn-danger btn-icon" data-id="{{$property->id}}"
                                         id="delete-btn"><i data-feather="trash-2"></i></button>
+                                    @endif
                                     @if ($property->is_sold == 'no')
 
                                     <button type="button" data-id="{{$property->id}}" id="mark-as-sold-btn"
                                         class="btn btn-success">Mark As Sold</button>
+
                                     @else
-                                    <button type="button" data-id="{{$property->id}}" id="revert-btn"
-                                        class="btn btn-danger">Revert</button>
+                                        @if ($user->role == 'admin')
+
+                                        <button type="button" data-id="{{$property->id}}" id="revert-btn"
+                                            class="btn btn-danger">Revert</button>
+
+                                        @endif
                                     @endif
                                 </td>
                             </tr>

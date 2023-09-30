@@ -187,7 +187,8 @@ class UserController extends Controller
             {
                 // find available properties in the name of agent
                 $properties = Property::where('agent_id', $user->id)->get();
-                if($properties){
+                // dd($properties);
+                if($properties->count() > 0){
                     $message = [
                         'success' => 0,
                         'text' =>'This Agent Has Properties Cannot Delete'
@@ -196,6 +197,11 @@ class UserController extends Controller
                     return $message;
                 }
             }
+            $user_photo = $user->photo;
+                if($user_photo)
+                {
+                    unlink($user_photo);
+                }
             $user->delete();
             $message = [
                 'success' => 1,

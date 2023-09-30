@@ -153,7 +153,7 @@
           </li>
 
           <li class="nav-item">
-            <a class="nav-link " @if (Route::is('about')) active @endif " href="{{route('about')}}">About</a>
+            <a class="nav-link @if (Route::is('about')) active @endif " href="{{route('about')}}">About</a>
           </li>
 
           <li class="nav-item">
@@ -161,13 +161,13 @@
           </li>
 
           <li class="nav-item">
-            <a class="nav-link @if (Route::is('all.agents')) active @endif " href="{{route('all.agents')}}">Agents</a>
+            <a class="nav-link @if (Route::is('all.agents')) active @endif" href="{{route('all.agents')}}">Agents</a>
           </li>
 
 
           </li>
           <li class="nav-item">
-            <a class="nav-link " href="{{route('contact')}}">Contact</a>
+            <a class="nav-link @if (Route::is('contact')) active @endif" href="{{route('contact')}}">Contact</a>
           </li>
 
           @php

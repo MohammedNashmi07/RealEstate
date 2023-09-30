@@ -46,15 +46,7 @@
     </form>
 </x-guest-layout> --}}
 <!DOCTYPE html>
-<!--
-Template Name: NobleUI - HTML Bootstrap 5 Admin Dashboard Template
-Author: NobleUI
-Website: https://www.nobleui.com
-Portfolio: https://themeforest.net/user/nobleui/portfolio
-Contact: nobleui123@gmail.com
-Purchase: https://1.envato.market/nobleui_admin
-License: For each use you must have a valid license purchased only from above link in order to legally use the theme for your project.
--->
+
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
@@ -156,7 +148,44 @@ License: For each use you must have a valid license purchased only from above li
 
 	<!-- Custom js for this page -->
 	<!-- End custom js for this page -->
+    {{-- sweet alert  --}}
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.28/dist/sweetalert2.all.min.js"></script>
+{{-- jquery cdn  --}}
+<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 
+<script>
+
+    const toastMixin = Swal.mixin({
+    toast: true,
+    position: 'top-right',
+    showConfirmButton: false,
+    timer: 3000,
+    timerProgressBar: true,
+    didOpen: (toast) => {
+      toast.addEventListener('mouseenter', Swal.stopTimer)
+      toast.addEventListener('mouseleave', Swal.resumeTimer)
+    },
+    customClass: {
+    container: 'dark-mode-toast',
+  },
+});
+
+    @if (session()->has('message.success'))
+        @if (session('message.success') == '1')
+            toastMixin.fire({
+                icon: 'success',
+                animation: true,
+                title: "{{ session('message.message') }}"
+            });
+        @else
+            toastMixin.fire({
+                icon: 'error',
+                animation: true,
+                title: "{{ session('message.message') }}"
+            });
+        @endif
+    @endif
+</script>
 </body>
 </html>
 

@@ -251,6 +251,7 @@ class PropertyController extends Controller
             $property_images = PropertyImage::where('property_id', $property->id)->get();
             foreach($property_images as $property_image)
             {
+                unlink($property_image->image_url);
                 $property_image->delete();
             }
             $property->delete();

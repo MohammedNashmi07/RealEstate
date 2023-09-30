@@ -80,7 +80,7 @@ class AdminController extends Controller
                 $user_photo = $user->photo;
                 if($user_photo)
                 {
-                    $delete_path = public_path($user_photo);
+                    
                     unlink($user_photo);
                 }
                 $image_extension = time().".".$request->photo->extension();
