@@ -78,6 +78,8 @@ Route::middleware('auth')->group(function () {
     Route::get('properties/create', [PropertyController::class, 'create'])->name('properties.create');
     Route::post('properties/store', [PropertyController::class,'store'])->name('properties.store');
     Route::get('properties/{id}/edit', [PropertyController::class,'edit'])->name('properties.edit');
+    Route::get('properties/{id}/mark-as-sold', [PropertyController::class,'markAsSold'])->name('properties.mark.sold');
+    Route::get('properties/{id}/mark-as-revert', [PropertyController::class,'markAsRevert'])->name('properties.mark.revert');
     Route::post('properties/{id}/update', [PropertyController::class,'update'])->name('properties.update');
     Route::delete('properties/{id}/delete', [PropertyController::class,'destroy'])->name('properties.destroy');
 });

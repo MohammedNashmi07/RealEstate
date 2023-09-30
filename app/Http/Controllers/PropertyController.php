@@ -36,12 +36,39 @@ class PropertyController extends Controller
         if($user->role == 'admin')
         {
 
-            $properties = Property::paginate(5);
+            $properties = Property::orderBy('created_at','desc')->paginate(5);
         }
         else{
-            $properties = Property::where('agent_id', $user->id)->paginate(5);
+            $properties = Property::where('agent_id', $user->id)->orderBy('created_at','desc')->paginate(5);
         }
         return view('property.index', compact('user', 'properties'));
+    }
+
+    public function markAsSold($id){
+        try
+        {
+            $property = Property::find($id);
+            $property->is_sold = 'yes';
+            $property->save();
+            return response()->json(['success' => true, 'text' => 'Property is Sold..!']);
+        }
+        catch(Exception $e){
+            dd($e);
+            return response()->json(['success' => false, 'text' => 'Something went wrong..!']);
+        }
+    }
+    public function markAsRevert($id){
+        try
+        {
+            $property = Property::find($id);
+            $property->is_sold = 'no';
+            $property->save();
+            return response()->json(['success' => true, 'text' => 'Property is Reverted..!']);
+        }
+        catch(Exception $e){
+            dd($e);
+            return response()->json(['success' => false, 'text' => 'Something went wrong..!']);
+        }
     }
 
     public function create(){

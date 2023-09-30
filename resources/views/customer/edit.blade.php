@@ -1,15 +1,12 @@
 @extends('admin_layouts.admin_master')
 @section('page_title', 'Customer Edit')
-
 @section('content')
-<div class="row">
 
+<div class="row">
     <div class="col-md-12 grid-margin stretch-card">
         <div class="card">
             <div class="card-body">
-
                 <h6 class="card-title">Edit Customer</h6>
-
                 <form action="{{route('customers.update', [$customer->id])}}" class="forms-sample" method="POST">
                     @csrf
                     <div class="row mb-3">
@@ -37,11 +34,9 @@
                                 placeholder="Input Email">
                         </div>
                     </div>
-
                     <button type="submit" class="btn btn-primary me-2">Submit</button>
                     <a href="{{route('customers.index')}}" class="btn btn-secondary">Cancel</a>
                 </form>
-
             </div>
         </div>
     </div>

@@ -37,10 +37,9 @@
       toast.addEventListener('mouseleave', Swal.resumeTimer)
     },
     customClass: {
-    container: 'dark-mode-toast', // Add a custom CSS class
+    container: 'dark-mode-toast',
   },
-  });
-
+});
 
     @if (session()->has('message.success'))
         @if (session('message.success') == '1')
@@ -57,8 +56,6 @@
             });
         @endif
     @endif
-
-
 </script>
 
 

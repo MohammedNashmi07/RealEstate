@@ -3,7 +3,6 @@
 
 <main id="main">
 
-    <!-- ======= Intro Single ======= -->
     <section class="intro-single">
       <div class="container">
         <div class="row">
@@ -31,9 +30,7 @@
           </div>
         </div>
       </div>
-    </section><!-- End Intro Single-->
-
-    <!-- ======= Property Single ======= -->
+    </section>
     <section class="property-single nav-arrow-b">
       <div class="container">
 
@@ -46,9 +43,6 @@
                         <img style="width: 1920px; height:960px; object-fit: cover;" src="{{asset($property_image->image_url)}}" alt="">
                     </div>
                   @endforeach
-                  {{-- <div class="carousel-item-b swiper-slide">
-                    <img src="assets/img/slide-2.jpg" alt="">
-                  </div> --}}
                 </div>
               </div>
               <div class="property-single-carousel-pagination carousel-pagination"></div>
@@ -57,7 +51,6 @@
 
         <div class="row">
           <div class="col-sm-12">
-
             <div class="row justify-content-between">
               <div class="col-md-5 col-lg-4">
                 <div class="property-price d-flex justify-content-center foo">
@@ -80,7 +73,6 @@
                   </div>
                   <div class="summary-list">
                     <ul class="list">
-
                       <li class="d-flex justify-content-between">
                         <strong>Location:</strong>
                         <span>{{$property->no}},{{$property->city}}
@@ -100,7 +92,6 @@
                             {{$property->size}} {{$property->measuring_unit}}
                         </span>
                       </li>
-
                     </ul>
                   </div>
                 </div>
@@ -117,18 +108,10 @@
                   <p class="description color-text-a">
                    {{$property->description}}
                   </p>
-                  {{-- <p class="description color-text-a no-margin">
-                    Curabitur arcu erat, accumsan id imperdiet et, porttitor at sem. Donec rutrum congue leo eget
-                    malesuada. Quisque velit nisi,
-                    pretium ut lacinia in, elementum id enim. Donec sollicitudin molestie malesuada.
-                  </p> --}}
                 </div>
-
-
               </div>
             </div>
           </div>
-
           <div class="col-md-12">
             <div class="row section-t3">
               <div class="col-sm-12">
@@ -160,9 +143,9 @@
                     </li>
 
                   </ul>
-
                 </div>
               </div>
+
               {{-- message option KEPT FOR FUTURE USE --}}
               {{-- <div class="col-md-12 col-lg-4">
                 <div class="property-contact">
@@ -190,12 +173,11 @@
                   </form>
                 </div>
               </div> --}}
+
             </div>
           </div>
         </div>
       </div>
-    </section><!-- End Property Single-->
-
-  </main><!-- End #main -->
-
+    </section>
+  </main>
 @endsection
