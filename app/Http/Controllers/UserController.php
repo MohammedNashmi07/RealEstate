@@ -87,10 +87,19 @@ class UserController extends Controller
 
             if($request->hasFile('photo'))
             {
+                if($request->role == 'agent')
+                {
 
-                $image_extension = time().".".$request->photo->extension();
-                $request->photo->move(public_path('upload/user_images'),$image_extension);
-                $image_path = 'upload/user_images/'.$image_extension;
+                    $image_extension = time().".".$request->photo->extension();
+                    $request->photo->move(public_path('upload/user_images'),$image_extension);
+                    $image_path = 'upload/user_images/'.$image_extension;
+                }
+                else{
+
+                    $image_extension = time().".".$request->photo->extension();
+                    $request->photo->move(public_path('upload/admin_images'),$image_extension);
+                    $image_path = 'upload/admin_images/'.$image_extension;
+                }
             }
             else{
                 $image_path = '';

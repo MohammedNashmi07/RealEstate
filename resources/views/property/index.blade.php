@@ -18,7 +18,6 @@
                                 <th>Type</th>
                                 <th>Price</th>
                                 <th>Size</th>
-                                <th>Status</th>
                                 <th>Is Sold</th>
                                 <th>Agent</th>
                                 <th>Customer</th>
@@ -35,15 +34,6 @@
                                 <td>{{$property->property_type}}</td>
                                 <td>{{$property->currency_type}}.{{number_format($property->price,2)}}</td>
                                 <td>{{$property->size}} {{$property->measuring_unit}}</td>
-                                <td>
-                                    @if ($property->status == 'approved')
-                                    <span class="badge bg-success">Approved</span>
-                                    @elseif ($property->status == 'rejected')
-                                    <span class="badge bg-danger">Rejected</span>
-                                    @else
-                                    <span class="badge bg-warning">Pending</span>
-                                    @endif
-                                </td>
                                 <td>
                                     @if ($property->is_sold == 'no')
                                     <span class="badge bg-danger">NO</span>

@@ -144,7 +144,7 @@
                     <div class="carousel-item-b swiper-slide">
                         <div class="card-box-a card-shadow">
                             <div class="img-box-a">
-                                <img src="{{asset($latest_property_image->image_url)}}" alt="" class="img-a img-fluid">
+                                <img style="width: 400px; height:600px; object-fit: cover;" src="{{asset($latest_property_image->image_url)}}" alt="" class="img-a img-fluid">
                             </div>
                             <div class="card-overlay">
                                 <div class="card-overlay-a-content">

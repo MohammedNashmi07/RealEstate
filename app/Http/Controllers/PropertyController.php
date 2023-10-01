@@ -53,7 +53,7 @@ class PropertyController extends Controller
             return response()->json(['success' => true, 'text' => 'Property is Sold..!']);
         }
         catch(Exception $e){
-            dd($e);
+          
             return response()->json(['success' => false, 'text' => 'Something went wrong..!']);
         }
     }
@@ -66,7 +66,7 @@ class PropertyController extends Controller
             return response()->json(['success' => true, 'text' => 'Property is Reverted..!']);
         }
         catch(Exception $e){
-            dd($e);
+
             return response()->json(['success' => false, 'text' => 'Something went wrong..!']);
         }
     }
