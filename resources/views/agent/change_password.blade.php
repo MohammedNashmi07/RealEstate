@@ -11,7 +11,7 @@
 
                 <div class="d-flex align-items-center justify-content-between mb-2">
                     <div>
-                        <img class="wd-100 rounded-circle"
+                        <img class="fixed-shape-image-round-big"
                             src="{{!empty($user->photo) ? asset($user->photo) : url('upload/no_image.jpg')}}"
                             style="width: 100px; height:100px;" alt="profile">
                         <span class="h4 ms-3 ">{{$user->user_name}}</span>

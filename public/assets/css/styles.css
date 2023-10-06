@@ -1,12 +1,16 @@
 
 .dark-mode-toast {
-
+    z-index: 1000000;
     background-color: #333; /* Dark background color */
-    color: #fff; /* Light text color */
+    color: black !important; /* Light text color */
     border-radius: 4px; /* Rounded corners */
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5); /* Shadow for the toast */
 
   }
+  
+.swal2-popup .swal2-title{
+    color: black !important;
+}
 
 select option{
     color: white !important;

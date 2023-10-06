@@ -51,8 +51,7 @@
 @endsection
 @section('scripts')
 <script>
-    $(document).on('click', '#delete-btn', function () {
-
+     $(document).on('click', '#delete-btn', function () {
         let id = $(this).data('id');
         let url = "{{ route('users.destroy', ':id') }}";
         url = url.replace(':id', id);
@@ -65,39 +64,42 @@
             cancelButtonColor: '#d33',
             confirmButtonText: 'Yes, delete it!'
         }).then((result) => {
-            $.ajax({
-                method: 'DELETE',
-                url: url,
-                data: {
-                    _token: "{{ csrf_token() }}"
-                },
-                success: function (response) {
-                    if (response.success == 1) {
-                        Swal.fire(
-                            'Deleted!',
-                            'User successfully deleted.',
-                            'success'
-                        ).then(() => {
-                            location.reload();
-                        });
-                    } else {
-                        Swal.fire({
-                            icon: 'error',
-                            title: 'Error',
-                            text: response.text
-                        });
+            if (result.isConfirmed) {
+                $.ajax({
+                    method: 'DELETE',
+                    url: url,
+                    data: {
+                        _token: "{{ csrf_token() }}"
+                    },
+                    success: function (response) {
+                        if (response.success == 1) {
+                            Swal.fire(
+                                'Deleted!',
+                                'User successfully deleted.',
+                                'success'
+                            ).then(() => {
+                                location.reload();
+                            });
+                        } else {
+                            showError(response.text);
+                        }
+                    },
+                    error: function (xhr, textStatus, errorThrown) {
+                        showError('Something went wrong with the request.');
                     }
-                },
-                error: function (xhr, textStatus, errorThrown) {
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Error',
-                        text: 'Something went wrong with the request.'
-                    });
-                }
-            });
-        })
-    })
+                });
+            }
+        });
+    });
 
+    function showError(message) {
+        Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: message
+        });
+    }
+
+ 
 </script>
 @endsection

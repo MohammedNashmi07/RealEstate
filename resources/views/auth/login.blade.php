@@ -121,7 +121,7 @@
 
                         <button class="btn btn-outline-primary btn-icon-text mb-2 mb-md-0">Login</button>
                       </div>
-                      <a href="register.html" class="d-block mt-3 text-muted">Not a user? Sign up</a>
+                      <a href="{{url('/')}}" class="d-block mt-3 text-muted">Go to Home Page</a>
                     </form>
                   </div>
                 </div>

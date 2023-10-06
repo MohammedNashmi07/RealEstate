@@ -49,7 +49,7 @@
 </div>
 @endsection
 @section('scripts')
-<script>
+{{-- <script>
     $(document).on('click', '#delete-btn', function () {
 
         let id = $(this).data('id');
@@ -105,5 +105,67 @@
         })
     })
 
+</script> --}}
+<script>
+    $(document).on('click', '#delete-btn', function () {
+        let id = $(this).data('id');
+        let url = "{{ route('customers.destroy', ':id') }}";
+        url = url.replace(':id', id);
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                deleteCustomer(id, url);
+            }
+        });
+    });
+
+    function deleteCustomer(id, url) {
+        $.ajax({
+            method: 'DELETE',
+            url: url,
+            data: {
+                _token: "{{ csrf_token() }}"
+            },
+            success: function (response) {
+                if (response.success == 1) {
+                    Swal.fire(
+                        'Deleted!',
+                        'Customer successfully deleted.',
+                        'success'
+                    ).then(() => {
+                        location.reload();
+                    });
+                } else {
+                    Swal.mixin({
+                        toast: true,
+                        icon: 'success',
+                        animation: true,
+                        title: response.text,
+                        position: 'top-right',
+                        showConfirmButton: false,
+                        timer: 3000,
+                        timerProgressBar: true,
+                        didOpen: (toast) => {
+                            toast.addEventListener('mouseenter', Swal
+                                .stopTimer)
+                            toast.addEventListener('mouseleave', Swal
+                                .resumeTimer)
+                        },
+                        customClass: {
+                            container: 'dark-mode-toast', // Add a custom CSS class
+                        },
+                    });
+                }
+            }
+        });
+    }
 </script>
+
 @endsection

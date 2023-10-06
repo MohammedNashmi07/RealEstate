@@ -137,8 +137,9 @@
         })
     })
 
-    $(document).on('click', '#delete-btn', function () {
 
+
+    $(document).on('click', '#delete-btn', function () {
         let id = $(this).data('id');
         let url = "{{ route('properties.destroy', ':id') }}";
         url = url.replace(':id', id);
@@ -151,48 +152,52 @@
             cancelButtonColor: '#d33',
             confirmButtonText: 'Yes, delete it!'
         }).then((result) => {
-            $.ajax({
-                method: 'DELETE',
-                url: url,
-                data: {
-                    _token: "{{ csrf_token() }}"
-                },
-                success: function (response) {
-                    if (response.success == 1) {
-                        Swal.fire(
-                            'Deleted!',
-                            'Property successfully deleted.',
-                            'success'
-                        ).then(() => {
-                            location.reload();
-                        });
+            if (result.isConfirmed) {
+                deleteProperty(id, url);
+            }
+        });
+    });
 
-                    } else {
-                        Swal.mixin({
-                            toast: true,
-                            icon: 'success',
-                            animation: true,
-                            title: response.text,
-                            position: 'top-right',
-                            showConfirmButton: false,
-                            timer: 3000,
-                            timerProgressBar: true,
-                            didOpen: (toast) => {
-                                toast.addEventListener('mouseenter', Swal
-                                    .stopTimer)
-                                toast.addEventListener('mouseleave', Swal
-                                    .resumeTimer)
-                            },
-                            customClass: {
-                                container: 'dark-mode-toast', // Add a custom CSS class
-                            },
-                        });
-                    }
-
+    function deleteProperty(id, url) {
+        $.ajax({
+            method: 'DELETE',
+            url: url,
+            data: {
+                _token: "{{ csrf_token() }}"
+            },
+            success: function (response) {
+                if (response.success == 1) {
+                    Swal.fire(
+                        'Deleted!',
+                        'Property successfully deleted.',
+                        'success'
+                    ).then(() => {
+                        location.reload();
+                    });
+                } else {
+                    Swal.mixin({
+                        toast: true,
+                        icon: 'success',
+                        animation: true,
+                        title: response.text,
+                        position: 'top-right',
+                        showConfirmButton: false,
+                        timer: 3000,
+                        timerProgressBar: true,
+                        didOpen: (toast) => {
+                            toast.addEventListener('mouseenter', Swal
+                                .stopTimer)
+                            toast.addEventListener('mouseleave', Swal
+                                .resumeTimer)
+                        },
+                        customClass: {
+                            container: 'dark-mode-toast', // Add a custom CSS class
+                        },
+                    });
                 }
-            })
-        })
-    })
+            }
+        });
+    }
 
 </script>
 @endsection

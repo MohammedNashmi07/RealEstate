@@ -5,7 +5,7 @@
   font-size: $font-size-base;
   background: lighten($card-bg, 5%);
   box-shadow: $card-box-shadow;
-  
+
   &.swal2-toast {
     box-shadow: $card-box-shadow;
     background: lighten($card-bg, 5%);
@@ -15,7 +15,7 @@
     font-size: 25px;
     line-height: 1;
     font-weight: 500;
-    color: $body-color;
+    color: black !important;
     margin-bottom: 0;
   }
 
